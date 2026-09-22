@@ -85,7 +85,12 @@ public class Buku
         {
             // TODO(Level 5): kembalikan StokTersedia / StokTotal * 100 (double).
             //   Kalau StokTotal = 0 kembalikan 0 (bukan NaN).
-            throw new NotImplementedException("Level 5 belum diimplementasikan");
+            if (_StokTotal != 0)
+            {
+                return _StokTersedia * 100.0 / _StokTotal;
+            } 
+
+            return 0;
         }
     }
 
@@ -95,7 +100,14 @@ public class Buku
         {
             // TODO(Level 5): kembalikan "Tersedia" kalau StokTersedia > 0,
             //   selain itu "Habis".
-            throw new NotImplementedException("Level 5 belum diimplementasikan");
+            if (_StokTersedia > 0)
+            {
+                return "Tersedia";
+            }
+            else
+            {
+                return "Habis";
+            }
         }
     }
 
