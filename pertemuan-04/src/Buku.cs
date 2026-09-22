@@ -5,16 +5,21 @@
 
 namespace Pertemuan04;
 
-public class Buku
+public class Buku 
 {
     // TODO(Level 1): field PUBLIK di bawah ini melanggar enkapsulasi (siapa pun
     //   bisa mengubahnya sembarangan). Jadikan field PRIVATE (awali nama dengan
     //   _) lalu ekspos lewat properti read-only: public get, tanpa setter
     //   publik. Nama properti tetap Isbn, Judul, StokTotal, StokTersedia.
-    public string Isbn = "";
-    public string Judul = "";
-    public int StokTotal;
-    public int StokTersedia;
+    private string _Isbn;
+    private string _Judul;
+    private int _StokTotal;
+    private int _StokTersedia;
+
+    public string Isbn => _Isbn;              
+    public string Judul => _Judul;
+    public int StokTotal => _StokTotal;
+    public int StokTersedia => _StokTersedia;
 
     // TODO(Level 8): properti di bawah ini menerima nilai apa saja. Beri nilai
     //   awal 7 dan tambahkan logika validasi di accessor set (perlu field
@@ -33,7 +38,10 @@ public class Buku
     {
         // TODO(Level 1): isi Isbn, Judul, StokTotal dari parameter; StokTersedia
         //   awal = stokTotal.
-        throw new NotImplementedException("Level 1 belum diimplementasikan");
+        _Isbn = isbn;
+        _Judul = judul;
+        _StokTotal = stokTotal;
+        _StokTersedia = stokTotal;
     }
 
     public void Pinjam()
