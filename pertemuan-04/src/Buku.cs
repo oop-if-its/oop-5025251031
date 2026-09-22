@@ -36,6 +36,13 @@ public class Buku
     //   kalau tidak, lempar ArgumentException. Isbn menyimpan versi TANPA '-'.
     public Buku(string isbn, string judul, int stokTotal)
     {
+        if(string.IsNullOrWhiteSpace(judul))
+        {
+            throw new ArgumentException("Judul tidak boleh kosong");
+        }else if(stokTotal < 0)
+        {
+            throw new ArgumentException("Stok tidak boleh negatif");
+        }
         // TODO(Level 1): isi Isbn, Judul, StokTotal dari parameter; StokTersedia
         //   awal = stokTotal.
         _Isbn = isbn;
