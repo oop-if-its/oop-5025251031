@@ -40,7 +40,31 @@ public class Perpustakaan
         //   akun.JumlahPinjamanAktif sudah sama dengan AkunAnggota.MaksPinjaman
         //   -> InvalidOperationException; selain itu panggil buku.Pinjam()
         //   (boleh melempar kalau stok habis) lalu akun.CatatPinjam().
-        throw new NotImplementedException("Level 10 belum diimplementasikan");
+        
+        if (akun == null)
+        {
+            throw new ArgumentNullException(nameof(akun), "Akun anggota tidak boleh null.");
+        }
+
+        Buku? buku = Cari(isbn);
+        if (buku == null)
+        {
+            throw new ArgumentException("Buku dengan ISBN tersebut tidak ditemukan.", nameof(isbn));
+        }
+
+        if (akun.Denda > 0)
+        {
+            throw new InvalidOperationException("Anggota tidak dapat meminjam buku karena masih memiliki denda.");
+        }
+
+        if (akun.JumlahPinjamanAktif >= AkunAnggota.MaksPinjaman)
+        {
+            throw new InvalidOperationException("Anggota telah mencapai batas maksimal peminjaman aktif.");
+        }
+
+        buku.Pinjam();
+        
+        akun.CatatPinjam();
     }
 
     public void KembalikanBuku(string isbn, AkunAnggota akun)
@@ -49,6 +73,25 @@ public class Perpustakaan
         //   ArgumentException; akun.JumlahPinjamanAktif = 0 ->
         //   InvalidOperationException; selain itu panggil buku.Kembalikan() lalu
         //   akun.CatatKembali().
-        throw new NotImplementedException("Level 10 belum diimplementasikan");
+        
+        if (akun == null)
+        {
+            throw new ArgumentNullException(nameof(akun), "Akun anggota tidak boleh null.");
+        }
+
+        Buku? buku = Cari(isbn);
+        if (buku == null)
+        {
+            throw new ArgumentException("Buku dengan ISBN tersebut tidak ditemukan.", nameof(isbn));
+        }
+
+        if (akun.JumlahPinjamanAktif == 0)
+        {
+            throw new InvalidOperationException("Tidak ada pinjaman aktif pada akun anggota ini.");
+        }
+
+        buku.Kembalikan();
+        
+        akun.CatatKembali();
     }
 }
