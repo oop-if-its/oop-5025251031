@@ -36,16 +36,55 @@ public class Buku
     //   kalau tidak, lempar ArgumentException. Isbn menyimpan versi TANPA '-'.
     public Buku(string isbn, string judul, int stokTotal)
     {
+    
         if(string.IsNullOrWhiteSpace(judul))
         {
             throw new ArgumentException("Judul tidak boleh kosong");
-        }else if(stokTotal < 0)
+        }
+        else if(stokTotal < 0)
         {
             throw new ArgumentException("Stok tidak boleh negatif");
         }
+
+        if (string.IsNullOrWhiteSpace(isbn))
+        {
+            throw new ArgumentException("ISBN tidak boleh kosong");
+        }
+
+        string normalizedIsbn = isbn.Replace("-", "").Replace(" ", "");
+
+        if (normalizedIsbn.Length != 13)
+        {
+            throw new ArgumentException("ISBN harus tepat 13 digit angka setelah dinormalisasi.");
+        }
+
+        int sum = 0;
+        for (int i = 0; i < 12; i++)
+        {
+            if (!char.IsDigit(normalizedIsbn[i]))
+            {
+                throw new ArgumentException("ISBN hanya boleh berisi angka.");
+            }
+
+            int digit = normalizedIsbn[i] - '0'; // Cara cepat convert char ke int
+            sum += digit * (i % 2 == 0 ? 1 : 3);
+        }
+
+        if (!char.IsDigit(normalizedIsbn[12]))
+        {
+            throw new ArgumentException("ISBN hanya boleh berisi angka.");
+        }
+        
+        int checkDigit = (10 - (sum % 10)) % 10;
+        int lastDigit = normalizedIsbn[12] - '0';
+
+        if (checkDigit != lastDigit)
+        {
+            throw new ArgumentException("Digit cek ISBN-13 tidak valid.");
+        }
         // TODO(Level 1): isi Isbn, Judul, StokTotal dari parameter; StokTersedia
         //   awal = stokTotal.
-        _Isbn = isbn;
+        _Isbn = normalizedIsbn;
         _Judul = judul;
         _StokTotal = stokTotal;
         _StokTersedia = stokTotal;
