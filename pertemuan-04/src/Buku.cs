@@ -25,10 +25,28 @@ public class Buku
     //   awal 7 dan tambahkan logika validasi di accessor set (perlu field
     //   pendukung): nilai harus 1..30, di luar itu lempar
     //   ArgumentOutOfRangeException dan JANGAN mengubah nilai lama.
-    public int BatasHariPinjam { get; set; }
+    
+    private int _batasHariPinjam = 7;
 
+    public int BatasHariPinjam 
+    { 
+        get 
+        { 
+            return _batasHariPinjam; 
+        } 
+        set 
+        {
+            // Validasi nilai harus antara 1 sampai 30
+            if (value < 1 || value > 30)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Batas hari pinjam harus antara 1 hingga 30 hari.");
+            }
+            // Jika valid, ubah nilainya
+            _batasHariPinjam = value;
+        } 
+    }
     // TODO(Level 2): validasi di AWAL konstruktor -- judul null/kosong/spasi
-    //   saja atau stokTotal negatif -> lempar ArgumentException
+    //    saja atau stokTotal negatif -> lempar ArgumentException
     //   (ArgumentOutOfRangeException juga boleh); jangan ada state yang berubah
     //   kalau ditolak.
     // TODO(Level 6): validasi & normalisasi ISBN -- buang tanda '-' dan spasi;
