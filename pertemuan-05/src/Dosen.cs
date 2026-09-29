@@ -29,6 +29,6 @@ public class Dosen : Anggota
     public string InfoLengkap()
     {
         // TODO(Level 7): "<Info()> | NIP: <Nip> | Alamat: <Alamat>".
-        throw new NotImplementedException("Level 7 belum diimplementasikan");
+        return $"{Info()} | NIP: {Nip} | Alamat: {Alamat}";    
     }
 }
