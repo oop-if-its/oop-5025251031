@@ -16,7 +16,12 @@ public class Dosen : Anggota
     {
         // TODO(Level 3): nip null/kosong/spasi -> ArgumentException; selain itu
         //   isi Nip.
-        throw new NotImplementedException("Level 3 belum diimplementasikan");
+        if (string.IsNullOrWhiteSpace(nip))
+        {
+            throw new ArgumentException("NIP tidak boleh kosong atau spasi saja.", nameof(nip));
+        }
+
+        Nip = nip;
     }
 
     public string InfoLengkap()
