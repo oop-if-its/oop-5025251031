@@ -17,7 +17,7 @@ public class Anggota
     // TODO(Level 4): setter BatasPinjam sekarang PUBLIC sehingga siapa pun bisa
     //   mengubahnya. Ubah menjadi `protected set` supaya hanya Anggota dan kelas
     //   turunannya yang boleh mengubah. Nilai awal untuk Anggota biasa = 2.
-    public int BatasPinjam { get; set; } = 2;
+    public int BatasPinjam { get; protected set; } = 2;
 
     public int JumlahPinjam { get; private set; }
 

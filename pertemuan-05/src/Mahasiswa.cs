@@ -33,6 +33,8 @@ public class Mahasiswa : Anggota
         Nrp = nrp;
         Prodi = prodi;
 
+        BatasPinjam = 3;
+
     }
 
     public string InfoLengkap()

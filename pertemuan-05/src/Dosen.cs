@@ -22,6 +22,8 @@ public class Dosen : Anggota
         }
 
         Nip = nip;
+
+        BatasPinjam = 10;
     }
 
     public string InfoLengkap()
