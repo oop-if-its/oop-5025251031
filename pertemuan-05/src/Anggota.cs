@@ -75,6 +75,17 @@ public class Anggota
         // TODO(Level 5): judul null/kosong -> ArgumentException; JumlahPinjam
         //   sudah mencapai BatasPinjam -> InvalidOperationException; selain itu
         //   naikkan JumlahPinjam satu.
-        throw new NotImplementedException("Level 5 belum diimplementasikan");
+
+        if (string.IsNullOrWhiteSpace(judul))
+        {
+            throw new ArgumentException("Judul tidak boleh kosong atau spasi saja.", nameof(judul));
+        }
+        
+        if (JumlahPinjam >= BatasPinjam)
+        {
+            throw new InvalidOperationException();
+        }
+
+        JumlahPinjam++;
     }
 }
