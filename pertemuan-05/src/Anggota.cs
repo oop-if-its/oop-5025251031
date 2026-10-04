@@ -25,6 +25,8 @@ public class Anggota
     //   new();` -- setiap Anggota MEMILIKI log-nya sendiri (bukan satu log
     //   bersama/static).
 
+    private readonly LogAktivitas _log = new();
+
     // Level 9: riwayat aktivitas milik anggota ini.
     public IReadOnlyList<string> Riwayat
     {
@@ -32,7 +34,7 @@ public class Anggota
         {
             // TODO(Level 9): kembalikan isi log milik anggota ini
             //   (LogAktivitas.Semua).
-            throw new NotImplementedException("Level 9 belum diimplementasikan");
+            return _log.Semua;        
         }
     }
 
@@ -87,5 +89,7 @@ public class Anggota
         }
 
         JumlahPinjam++;
+
+        _log.Catat($"Pinjam: {judul}");
     }
 }
