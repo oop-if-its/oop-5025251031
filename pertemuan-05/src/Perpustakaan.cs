@@ -18,14 +18,28 @@ public class Perpustakaan
         // TODO(Level 8): anggota null -> ArgumentNullException; Id yang sudah
         //   terdaftar -> InvalidOperationException; selain itu tambahkan ke
         //   daftar.
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        
+        if (anggota == null)
+        {
+            throw new ArgumentNullException(nameof(anggota), "Anggota tidak boleh null.");
+        }
+
+        // Cek apakah ada anggota di dalam list yang Id-nya sama
+        if (_anggota.Any(a => a.Id == anggota.Id))
+        {
+            throw new InvalidOperationException("Anggota dengan Id tersebut sudah terdaftar.");
+        }
+
+        _anggota.Add(anggota);
     }
 
     public Anggota? Cari(string id)
     {
         // TODO(Level 8): kembalikan anggota dengan Id yang sama persis, atau
         //   null.
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        
+        // LINQ FirstOrDefault akan mencari elemen pertama yang cocok, jika tidak ada mengembalikan null
+        return _anggota.FirstOrDefault(a => a.Id == id);
     }
 
     public int JumlahMahasiswa()
@@ -33,12 +47,18 @@ public class Perpustakaan
         // TODO(Level 8): hitung anggota yang bertipe Mahasiswa (termasuk
         //   turunannya, mis. Asisten -- ingat: turunan "adalah sebuah"
         //   Mahasiswa). Petunjuk: `is` atau OfType<T>().
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        
+        // OfType<Mahasiswa>() akan menyaring hanya objek yang bertipe Mahasiswa (dan turunannya seperti Asisten)
+        return _anggota.OfType<Mahasiswa>().Count();
+        
+        // Alternatif lain yang sama benarnya:
+        // return _anggota.Count(a => a is Mahasiswa);
     }
 
     public int JumlahDosen()
     {
         // TODO(Level 8): hitung anggota yang bertipe Dosen.
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        
+        return _anggota.OfType<Dosen>().Count();
     }
 }
