@@ -20,6 +20,15 @@ public class Buku : Item
     // TODO(Level 2): tulis override HitungDenda(int) untuk Buku: Rp2.000 per
     //   hari terlambat (hariTerlambat <= 0 -> 0). Pakai `public override`, BUKAN
     //   `new`.
+    public override int HitungDenda(int hariTerlambat)
+    {
+        if (hariTerlambat <= 0)
+        {
+            return 0;
+        }
+
+        return hariTerlambat * 2000;
+    }
 
     // TODO(Level 4): override properti MasaPinjamHari -> 14.
 

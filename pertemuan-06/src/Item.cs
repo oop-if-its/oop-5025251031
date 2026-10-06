@@ -22,8 +22,7 @@ public class Item
 
     // TODO(Level 2): jadikan method ini `virtual` supaya bisa di-override (lalu
     //   tulis override-nya di Buku, Majalah, Dvd).
-    public int HitungDenda(int hariTerlambat)
-    {
+    public virtual int HitungDenda(int hariTerlambat)    {
         // TODO(Level 1): denda umum = Rp1.000 per hari terlambat. hariTerlambat
         //   <= 0 -> 0.
         if (hariTerlambat <= 0)
