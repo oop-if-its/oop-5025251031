@@ -14,14 +14,22 @@ public static class PemilahItem
         // TODO(Level 7): null -> ArgumentNullException; kembalikan hanya item
         //   yang bertipe Buku (urutan asli dipertahankan). Boleh dengan
         //   `is`/`as` di dalam foreach atau OfType<Buku>().
-        throw new NotImplementedException("Level 7 belum diimplementasikan");
+        if (daftar == null)
+            throw new ArgumentNullException(nameof(daftar));
+
+        return daftar.OfType<Buku>().ToList();
     }
 
     public static string? PenulisAtauNull(Item item)
     {
         // TODO(Level 7): kembalikan Penulis kalau item adalah Buku, selain itu
         //   null. Pakai pattern matching `is Buku b`.
-        throw new NotImplementedException("Level 7 belum diimplementasikan");
+        if (item is Buku b)
+        {
+            return b.Penulis;
+        }
+
+        return null;
     }
 
     public static Buku KeBuku(Item item)
