@@ -32,4 +32,5 @@ public class Majalah : Item
 
     // TODO(Level 5): override Deskripsi() -> "<base.Deskripsi()> edisi <Edisi>",
     //   mis. "[Tempo] edisi 12".
+    public override string Deskripsi() => $"{base.Deskripsi()} edisi {Edisi}";
 }
