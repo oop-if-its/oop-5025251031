@@ -38,7 +38,10 @@ public static class PemilahItem
         //   EXPLICIT CAST `(Buku)item` -- kalau item bukan Buku, biarkan .NET
         //   melempar InvalidCastException (jangan ditangkap, jangan diganti
         //   pesan sendiri).
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        if (item == null)
+            throw new ArgumentNullException(nameof(item));
+
+        return (Buku)item;
     }
 
     public static bool CobaKeBuku(Item? item, out Buku? buku)
@@ -46,6 +49,13 @@ public static class PemilahItem
         // TODO(Level 8): pola TryXxx -- kembalikan true dan isi `buku` kalau
         //   item adalah Buku; selain itu (termasuk item null) kembalikan false
         //   dan isi `buku` = null. TIDAK boleh melempar exception.
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        if (item is Buku b)
+        {
+            buku = b;
+            return true;
+        }
+
+        buku = null;
+        return false;
     }
 }
