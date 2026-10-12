@@ -35,7 +35,7 @@ public class Item
 
     // TODO(Level 4): jadikan properti ini `virtual`, lalu override di Buku (14),
     //   Majalah (3), dan Dvd (2).
-    public int MasaPinjamHari => 7;
+    public virtual int MasaPinjamHari => 7;
 
     // TODO(Level 5): jadikan `virtual`; override di Buku/Majalah/Dvd dengan
     //   MEMANGGIL versi induk lewat base.Deskripsi() lalu menambahkan detailnya.

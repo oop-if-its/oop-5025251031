@@ -26,6 +26,7 @@ public class Dvd : Item
     }
 
     // TODO(Level 4): override MasaPinjamHari -> 2.
+    public override int MasaPinjamHari => 2;
 
     // TODO(Level 5): override Deskripsi() -> "<base.Deskripsi()> (<DurasiMenit>
     //   menit)", mis. "[Laskar Pelangi] (125 menit)".
