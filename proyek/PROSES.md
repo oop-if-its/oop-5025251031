@@ -53,4 +53,4 @@ Apa yang terjadi: Saat mengeksekusi metode Transfer(), saldo rekening pengirim s
 
 Bagaimana menemukan penyebabnya: Penelusuran alur eksekusi (debugging) dilakukan pada metode Transfer() di BankService. Ditemukan bahwa pemanggilan pengirim.Tarik() dan penerima.Setor() berjalan secara berurutan tanpa adanya mekanisme pemulihan kondisi saldo jika tahap kedua melempar exception.
 
-Bagaimana memperbaikinya: Membungkus pemanggilan penerima.Setor() di dalam blok try-catch. Jika Setor() gagal, blok catch secara otomatis mengeksekusi pengirim.Setor(jumlah) untuk mengembalikan saldo pengirim ke posisi semula (rollback) sebelum melempar kembali exception tersebut dengan instruksi throw.
+Bagaimana memperbaikinya: Membungkus pemanggilan penerima.Setor() di dalam blok try-catch. Jika Setor() gagal, blok catch secara otomatis mengeksekusi pengirim.Setor(jumlah) untuk mengembalikan saldo pengirim ke posisi semula (rollback) sebelum melempar kembali exception tersebut dengan instruksi throw.    
