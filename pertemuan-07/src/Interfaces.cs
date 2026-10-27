@@ -38,6 +38,6 @@ public interface IDapatDicetak
     {
         // TODO(Level 8): kembalikan "=== <Cetak()> ===" -- mis. "=== Buku: Bumi
         //   Manusia oleh Pramoedya ===".
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        return $"=== {Cetak()} ===";
     }
 }

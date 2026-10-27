@@ -13,7 +13,7 @@ namespace Pertemuan07;
 //   diperpanjang).
 // TODO(Level 8): implementasikan IDapatDicetak (implementasi biasa / implisit --
 //   method Cetak() bersifat public).
-public class Buku : Item, IDapatDipinjam, IDapatDiperpanjang
+public class Buku : Item, IDapatDipinjam, IDapatDiperpanjang, IDapatDicetak
 {
     public string Penulis { get; }
 
@@ -84,4 +84,9 @@ public class Buku : Item, IDapatDipinjam, IDapatDiperpanjang
 
     // TODO(Level 8): implementasi IDapatDicetak -> "Buku: <Judul> oleh
     //   <Penulis>".
-}
+
+    public string Cetak()
+    {
+        return $"Buku: {Judul} oleh {Penulis}";        
+    }
+}   

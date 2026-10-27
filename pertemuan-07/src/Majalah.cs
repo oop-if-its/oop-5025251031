@@ -10,7 +10,7 @@ namespace Pertemuan07;
 //   IDapatDicetak.Cetak()`) -- method-nya tidak muncul di tipe Majalah, hanya
 //   lewat variabel bertipe IDapatDicetak.
 // Majalah TIDAK mengimplementasikan IDapatDiperpanjang.
-public class Majalah : Item, IDapatDipinjam
+public class Majalah : Item, IDapatDipinjam, IDapatDicetak
 {
     public int Edisi { get; }
 
@@ -52,4 +52,9 @@ public class Majalah : Item, IDapatDipinjam
 
     // TODO(Level 8): implementasi EKSPLISIT IDapatDicetak.Cetak() -> "Majalah:
     //   <Judul> edisi <Edisi>".
+
+    string IDapatDicetak.Cetak()
+    {
+        return $"Majalah: {Judul} edisi {Edisi}";
+    }    
 }
