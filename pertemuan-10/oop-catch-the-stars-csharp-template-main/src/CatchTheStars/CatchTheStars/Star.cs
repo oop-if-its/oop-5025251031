@@ -41,4 +41,9 @@ public class Star
     {
         _starPictureBox.Top += _fallSpeed;
     }
+
+    public bool IsOutOfSky(Size skySize)
+    {
+        return _starPictureBox.Top > skySize.Height;
+    }
 }

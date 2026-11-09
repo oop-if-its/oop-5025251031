@@ -96,5 +96,9 @@ public class Sky : Form
             UpdateScore();
             GenerateStar();
         }
-    }   
+        else if (_star.IsOutOfSky(this.ClientSize))
+        {
+            GenerateStar();
+        }
+    }
 }
