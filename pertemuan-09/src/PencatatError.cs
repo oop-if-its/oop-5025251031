@@ -28,6 +28,14 @@ public class PencatatError
         //   dengan `throw;` (BUKAN `throw ex;`) supaya stack trace aslinya --
         //   termasuk method yang benar-benar menyebabkan error -- tidak hilang.
         //   Kalau aksi sukses, tidak ada yang dicatat.
-        throw new NotImplementedException("Level 7 belum diimplementasikan");
+        try
+        {
+            aksi();
+        }
+        catch (Exception ex)
+        {
+            _log.Add($"ERROR: {ex.Message}");
+            throw;
+        }
     }
 }
