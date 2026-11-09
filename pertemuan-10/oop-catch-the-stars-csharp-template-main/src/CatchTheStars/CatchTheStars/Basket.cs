@@ -50,4 +50,9 @@ public class Basket
             _basketPictureBox.Left += _speed;
         }
     }
+
+    public bool IsCollidedWith(Star star)
+    {
+        return star.GetPictureBox().Bounds.IntersectsWith(this.GetPictureBox().Bounds);
+    }
 }

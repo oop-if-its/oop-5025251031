@@ -69,5 +69,9 @@ public class Sky : Form
 
         if (_goLeft) _basket.MoveLeft();
         if (_goRight) _basket.MoveRight(this.ClientSize.Width);
+
+        if (_basket.IsCollidedWith(_star))
+        {
+        }
     }
 }
