@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace CatchTheStars;
@@ -11,6 +12,8 @@ public class Sky : Form
     private Star _star = null!;
     private System.Windows.Forms.Timer _gameTimer = null!;
     private bool _goLeft, _goRight;
+
+    private SoundPlayer? _collisionSound;
 
     private int _score;
     public int Score { get { return _score; } }
@@ -26,6 +29,15 @@ public class Sky : Form
         this.KeyUp += new KeyEventHandler(OnKeyUp);
 
         _score = 0;
+
+        try
+        {
+            _collisionSound = new SoundPlayer(Resource.coin);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Gagal load sound coin: " + ex.Message);
+        }
 
         InitializeGame();
     }
@@ -93,6 +105,7 @@ public class Sky : Form
 
         if (_basket.IsCollidedWith(_star))
         {
+            _collisionSound?.Play();
             UpdateScore();
             GenerateStar();
         }
