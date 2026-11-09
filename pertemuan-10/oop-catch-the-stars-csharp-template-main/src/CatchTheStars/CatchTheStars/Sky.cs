@@ -7,8 +7,9 @@ namespace CatchTheStars;
 public class Sky : Form
 {
 	private Label _scoreLabel = null!;
+    private Basket _basket = null!;
 
-	public Sky()
+    public Sky()
 	{
 		this.Text = "Catch the Falling Stars";
 		this.Size = new Size(800, 600);
@@ -17,16 +18,19 @@ public class Sky : Form
 		InitializeGame();
 	}
 
-	private void InitializeGame()
-	{
-		_scoreLabel = new Label
-		{
-			Text = "Score: 0",
-			Location = new Point(10, 10),
-			Font = new Font("Arial", 16),
-			ForeColor = Color.Black,
-			AutoSize = true
-		};
-		this.Controls.Add(_scoreLabel);
-	}
+    private void InitializeGame()
+    {
+        _scoreLabel = new Label
+        {
+            Text = "Score: 0",
+            Location = new Point(10, 10),
+            Font = new Font("Arial", 16),
+            ForeColor = Color.Black,
+            AutoSize = true
+        };
+        this.Controls.Add(_scoreLabel);
+
+        _basket = new Basket(this.ClientSize, 15);
+        this.Controls.Add(_basket.GetPictureBox());
+    }
 }
