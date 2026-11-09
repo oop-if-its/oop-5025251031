@@ -48,5 +48,6 @@ public class Sky : Form
 
     private void GameLoop(object? sender, EventArgs e)
     {
+        _star.Fall();
     }
 }

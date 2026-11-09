@@ -36,4 +36,9 @@ public class Star
     {
         return _starPictureBox;
     }
+
+    public void Fall()
+    {
+        _starPictureBox.Top += _fallSpeed;
+    }
 }
