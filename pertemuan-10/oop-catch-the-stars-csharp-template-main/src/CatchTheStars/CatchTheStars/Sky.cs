@@ -12,6 +12,9 @@ public class Sky : Form
     private System.Windows.Forms.Timer _gameTimer = null!;
     private bool _goLeft, _goRight;
 
+    private int _score;
+    public int Score { get { return _score; } }
+
     public Sky()
     {
         this.Text = "Catch the Falling Stars";
@@ -21,6 +24,8 @@ public class Sky : Form
 
         this.KeyDown += new KeyEventHandler(OnKeyDown);
         this.KeyUp += new KeyEventHandler(OnKeyUp);
+
+        _score = 0;
 
         InitializeGame();
     }
@@ -63,6 +68,22 @@ public class Sky : Form
         if (e.KeyCode == Keys.Right) _goRight = false;
     }
 
+    public void GenerateStar()
+    {
+        if (_star != null)
+        {
+            this.Controls.Remove(_star.GetPictureBox());
+        }
+        _star = new Star(5, this.ClientSize);
+        this.Controls.Add(_star.GetPictureBox());
+    }
+
+    public void UpdateScore()
+    {
+        _score++;
+        _scoreLabel.Text = "Score: " + _score;
+    }
+
     private void GameLoop(object? sender, EventArgs e)
     {
         _star.Fall();
@@ -72,6 +93,8 @@ public class Sky : Form
 
         if (_basket.IsCollidedWith(_star))
         {
+            UpdateScore();
+            GenerateStar();
         }
-    }
+    }   
 }
