@@ -8,6 +8,7 @@ public class Sky : Form
 {
 	private Label _scoreLabel = null!;
     private Basket _basket = null!;
+    private Star _star = null!;
 
     public Sky()
 	{
@@ -32,5 +33,8 @@ public class Sky : Form
 
         _basket = new Basket(this.ClientSize, 15);
         this.Controls.Add(_basket.GetPictureBox());
+
+        _star = new Star(5, this.ClientSize);
+        this.Controls.Add(_star.GetPictureBox());
     }
 }
