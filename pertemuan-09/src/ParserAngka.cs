@@ -15,6 +15,17 @@ public static class ParserAngka
         //   valid." dan SERTAKAN exception aslinya sebagai InnerException
         //   (konstruktor kedua). Kalau teks null, ArgumentNullException dari
         //   int.Parse BOLEH menjalar apa adanya (jangan dibungkus).
-        throw new NotImplementedException("Level 6 belum diimplementasikan");
+        try
+        {
+            return int.Parse(teks);
+        }
+        catch (FormatException ex)
+        {
+            throw new DataTidakValidException($"'{teks}' bukan angka yang valid.", ex);
+        }
+        catch (OverflowException ex)
+        {
+            throw new DataTidakValidException($"'{teks}' bukan angka yang valid.", ex);
+        }
     }
 }
