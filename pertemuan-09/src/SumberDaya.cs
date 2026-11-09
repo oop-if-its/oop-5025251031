@@ -13,7 +13,7 @@ namespace Pertemuan08;
 //   public void Dispose() { Dispose(true); GC.SuppressFinalize(this); }  |
 //   protected virtual void Dispose(bool disposing) { ... }  |  ~SumberDaya() {
 //   Dispose(false); }.
-public class SumberDaya
+public class SumberDaya : IDisposable
 {
     private static int _dibersihkanDispose;
     private static int _dibersihkanFinalizer;
@@ -34,12 +34,33 @@ public class SumberDaya
     }
 
     // TODO(Level 9): tulis `public void Dispose()` sesuai pola di atas kelas.
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
     // TODO(Level 9): tulis `protected virtual void Dispose(bool disposing)`:
     //   kalau _sudahDibersihkan sudah true -> return (idempoten). disposing =
     //   true -> CatatDispose(); disposing = false (dipanggil finalizer) ->
     //   CatatFinalizer(). Lalu set _sudahDibersihkan = true.
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_sudahDibersihkan)
+            return;
+
+        if (disposing)
+            CatatDispose();
+        else
+            CatatFinalizer();
+
+        _sudahDibersihkan = true;
+    }
 
     // TODO(Level 9): tulis finalizer `~SumberDaya()` yang memanggil
     //   Dispose(false).
+    ~SumberDaya()
+    {
+        Dispose(false);
+    }
 }
