@@ -7,7 +7,7 @@ namespace Pertemuan08;
 
 // Sumber daya yang harus DITUTUP: setiap Koneksi yang dibuka wajib di-Dispose.
 // TODO(Level 8): buat Koneksi mengimplementasikan IDisposable (`: IDisposable`).
-public class Koneksi
+public class Koneksi : IDisposable
 {
     private static int _jumlahTerbuka;
 
@@ -20,7 +20,8 @@ public class Koneksi
     {
         // TODO(Level 8): Koneksi baru langsung Terbuka = true dan menaikkan
         //   JumlahTerbuka (field _jumlahTerbuka) satu.
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        Terbuka = true;
+        _jumlahTerbuka++;
     }
 
     public string Query(string sql)
@@ -28,13 +29,24 @@ public class Koneksi
         // TODO(Level 8): kalau sudah ditutup (Terbuka = false) -> lempar
         //   ObjectDisposedException(nameof(Koneksi)); selain itu kembalikan
         //   "hasil: <sql>".
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        if (!Terbuka)
+            throw new ObjectDisposedException(nameof(Koneksi));
+
+        return $"hasil: {sql}";
     }
 
     // TODO(Level 8): tulis `public void Dispose()`: idempoten -- kalau sudah
     //   ditutup, tidak melakukan apa-apa; selain itu Terbuka = false dan
     //   turunkan _jumlahTerbuka satu (memanggil Dispose dua kali tidak boleh
     //   membuat hitungan turun dua kali).
+    public void Dispose()
+    {
+        if (!Terbuka)
+            return;
+
+        Terbuka = false;
+        _jumlahTerbuka--;
+    }
 }
 
 public static class Pemakai
@@ -47,6 +59,12 @@ public static class Pemakai
         //   SETELAH koneksi dibuka. Koneksi HARUS tertutup di kedua kasus
         //   (sukses maupun exception) -- itulah gunanya `using`. Kembalikan
         //   hasil Query.
-        throw new NotImplementedException("Level 8 belum diimplementasikan");
+        using var koneksi = new Koneksi();
+        var hasil = koneksi.Query(sql);
+
+        if (sengajaGagal)
+            throw new InvalidOperationException("gagal");
+
+        return hasil;
     }
 }
