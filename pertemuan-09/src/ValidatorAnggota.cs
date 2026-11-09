@@ -17,7 +17,28 @@ public static class ValidatorAnggota
         //   bukan tepat 10 digit angka (null juga tidak valid) -> "NRP harus 10
         //   digit"; usia di luar 17..80 -> "Usia harus 17-80". Urutannya harus
         //   begitu (nama, nrp, usia).
-        throw new NotImplementedException("Level 10 belum diimplementasikan");
+        if (string.IsNullOrWhiteSpace(nama))
+            galat.Add("Nama wajib diisi");
+
+        if (nrp is null || nrp.Length != 10)
+        {
+            galat.Add("NRP harus 10 digit");
+        }
+        else
+        {
+            foreach (var c in nrp)
+            {
+                if (c < '0' || c > '9')
+                {
+                    galat.Add("NRP harus 10 digit");
+                    break;
+                }
+            }
+        }
+
+        if (usia < 17 || usia > 80)
+            galat.Add("Usia harus 17-80");
+
         return galat;
     }
 
@@ -26,7 +47,9 @@ public static class ValidatorAnggota
         // TODO(Level 10): bila ada kesalahan (dari Periksa), lempar
         //   ValidasiException dengan SELURUH daftarnya; kalau tidak ada, tidak
         //   terjadi apa-apa.
-        throw new NotImplementedException("Level 10 belum diimplementasikan");
+        var galat = Periksa(nama, nrp, usia);
+        if (galat.Count > 0)
+            throw new ValidasiException(galat);
     }
 
     public static bool TryValidasi(string nama, string nrp, int usia, out IReadOnlyList<string> daftarError)
@@ -34,6 +57,8 @@ public static class ValidatorAnggota
         // TODO(Level 10): versi TANPA exception (pola TryXxx): isi daftarError
         //   dengan hasil Periksa dan kembalikan true kalau daftarnya kosong.
         //   TIDAK boleh melempar exception.
-        throw new NotImplementedException("Level 10 belum diimplementasikan");
+        var galat = Periksa(nama, nrp, usia);
+        daftarError = galat;
+        return galat.Count == 0;
     }
 }
