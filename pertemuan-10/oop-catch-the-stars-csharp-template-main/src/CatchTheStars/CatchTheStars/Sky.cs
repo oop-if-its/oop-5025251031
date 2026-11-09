@@ -9,6 +9,7 @@ public class Sky : Form
 	private Label _scoreLabel = null!;
     private Basket _basket = null!;
     private Star _star = null!;
+    private System.Windows.Forms.Timer _gameTimer = null!;
 
     public Sky()
 	{
@@ -36,5 +37,16 @@ public class Sky : Form
 
         _star = new Star(5, this.ClientSize);
         this.Controls.Add(_star.GetPictureBox());
+
+        _gameTimer = new System.Windows.Forms.Timer
+        {
+            Interval = 20
+        };
+        _gameTimer.Tick += new EventHandler(GameLoop);
+        _gameTimer.Start();
+    }
+
+    private void GameLoop(object? sender, EventArgs e)
+    {
     }
 }
