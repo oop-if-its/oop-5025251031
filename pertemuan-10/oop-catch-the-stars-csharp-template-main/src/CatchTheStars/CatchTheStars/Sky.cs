@@ -10,15 +10,20 @@ public class Sky : Form
     private Basket _basket = null!;
     private Star _star = null!;
     private System.Windows.Forms.Timer _gameTimer = null!;
+    private bool _goLeft, _goRight;
 
     public Sky()
-	{
-		this.Text = "Catch the Falling Stars";
-		this.Size = new Size(800, 600);
-		this.StartPosition = FormStartPosition.CenterScreen;
+    {
+        this.Text = "Catch the Falling Stars";
+        this.Size = new Size(800, 600);
+        this.StartPosition = FormStartPosition.CenterScreen;
+        this.KeyPreview = true;
 
-		InitializeGame();
-	}
+        this.KeyDown += new KeyEventHandler(OnKeyDown);
+        this.KeyUp += new KeyEventHandler(OnKeyUp);
+
+        InitializeGame();
+    }
 
     private void InitializeGame()
     {
@@ -46,8 +51,23 @@ public class Sky : Form
         _gameTimer.Start();
     }
 
+    private void OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Left) _goLeft = true;
+        if (e.KeyCode == Keys.Right) _goRight = true;
+    }
+
+    private void OnKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Left) _goLeft = false;
+        if (e.KeyCode == Keys.Right) _goRight = false;
+    }
+
     private void GameLoop(object? sender, EventArgs e)
     {
         _star.Fall();
+
+        if (_goLeft) _basket.MoveLeft();
+        if (_goRight) _basket.MoveRight(this.ClientSize.Width);
     }
 }

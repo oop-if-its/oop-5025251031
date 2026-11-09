@@ -34,4 +34,20 @@ public class Basket
     {
         return _basketPictureBox;
     }
+
+    public void MoveLeft()
+    {
+        if (_basketPictureBox.Left > 0)
+        {
+            _basketPictureBox.Left -= _speed;
+        }
+    }
+
+    public void MoveRight(int boundary)
+    {
+        if (_basketPictureBox.Right < boundary)
+        {
+            _basketPictureBox.Left += _speed;
+        }
+    }
 }
